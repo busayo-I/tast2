@@ -6,7 +6,7 @@ class PersonSerializer(serializers.ModelSerializer):
         model = Person
         fields = '__all__'
     
-    #def validate(self, value):
-        #if any(char.isdigit() for char in value):
-           #raise serializers.validateError('NAME SHOULD BE ONLY LETTERS.')
-           #return validate()
+    def validate_name(self, value):
+        if any(char.isdigit() for char in value):
+            raise serializers.ValidationError("Name Can Only Contain Letters.")
+        return value
